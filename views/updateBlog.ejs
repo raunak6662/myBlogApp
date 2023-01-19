@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update Blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../stylesheets/style.css"> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+
+    <style>
+        .container {
+            height: 1000px;
+            width: 800px;
+            position: fixed;
+            top: 5%;
+            left: 23%;
+        }
+
+        body {
+            /* background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-34-1600x900.jpg'); */
+            /* background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-36-1440x900.jpg'); */
+            background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-40-1600x900.jpg');
+        }
+
+        .btn:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <form action="/blog/update/<%=userID%>/<%=blogID%>" method="post" name="Update_Blog" class="">
+                <h1 style="text-align: center;color: #f1f1f1;">Update your blog</h1><br>
+                <input type="text" class="" name="title" required="" autofocus=""
+                    style="height: 70px;width: 800px;font-size: 25px;text-align: left;font-size: 30px;font-family: Georgia, serif;"
+                    value="<%=title%>" />
+                <textarea type="text" class="" name="content" required=""
+                    style="height: 500px;width: 800px;margin-top: 15px; font-family: Georgia, sans-serif; font-size: 18px;word-spacing: 5px;line-height: 26pt; "><%=content%></textarea><br>
+                <br>
+                <button class="btn" name="Submit" value="UpdateBlog" type="Submit"
+                    style="float: left; margin-left: 30px;">Cancel</button>
+                <button class="btn" name="Submit" value="UpdateBlog" type="Submit"
+                    style="float: right; ">Update</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<head>
+<title>User Blogs</title>
+<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  $(document).ready(function(){
+    var maxLength = 300;
+    $(".show-read-more").each(function(){
+        var myStr = $(this).text();
+        if($.trim(myStr).length > maxLength){
+            var newStr = myStr.substring(0, maxLength);
+            var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+            $(this).empty().html(newStr);
+            $(this).append(' <a href="javascript:void(0);" class="read-more">read more...</a>');
+            $(this).append('<span class="more-text">' + removedStr + '</span>');
+        }
+    });
+    $(".read-more").click(function(){
+        $(this).siblings(".more-text").contents().unwrap();
+        $(this).remove();
+    });
+});
+</script>
+
+<style>
+    .container {
+    height: auto;
+    width: 800px;
+    position: relative;
+    top: 5%;
+    left: 15%;
+    border: 1px solid rgb(1, 10, 14);
+    padding: 50px;
+    margin: 20px;
+    background-color: white;
+}
+body{ 
+    /* background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-34-1600x900.jpg'); */
+    /* background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-36-1440x900.jpg'); */
+    background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-40-1600x900.jpg');
+    background-attachment: fixed;
+ }
+
+ .show-read-more .more-text{
+        display: none;
+    }
+
+  
+
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+hr.new1 {
+  border-top: 1px solid rgb(46, 42, 43);
+}
+
+.postbutton {
+    display: inline-block;
+}   
+
+.input {
+   font-family: Arial, Verdana;
+   font-size: 15px;
+   padding: 5px;
+   padding-top:5px;
+   border: 1px solid #b9bdc1;
+   width: 150px;
+   color: #797979;
+   text-align:left;
+   float:left;
+   margin-right:10px;
+}
+</style>
+
+</head>
+<body>
+<div class="todo-container">
+<h1 style="text-align: center;color: #f1f1f1;">Feeds</h1>
+<div class="todo">
+<ul class="todo-list">
+    <% data.forEach(function(eachUser){ %>
+    
+    
+    <div class="container" >
+    <h1 style="text-align: left;font-size: 30px;font-family: Georgia, serif;"><a href="/feed/<%=userID%>/<%=eachUser.id%>" style="text-decoration:none; color: black;"><%=eachUser.title%></a></h1>
+    <hr class="new1">
+    <p style="font-family: Georgia, sans-serif; font-size: 18px;word-spacing: 5px;line-height: 26pt; white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis;max-width: 50ch;" class="show-read-more"><a href="/feed/<%=userID%>/<%=eachUser.id%>" style="text-decoration:none; color: black;"><%=eachUser.content%></a></p>
+    <form action="/comment/<%=userID%>/<%=eachUser.id%>" method="post" name="Write_Comment" class="w3-container w3-card-4 w3-light-grey postbutton">
+        <input type="text" class="w3-input w3-border-0 input" name="text" placeholder="Write your comment" required="" style="height: 30px;font-size: 15px;padding-right: 100px;border-radius: 6px;"/>
+        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Write_Comment" type="Submit" style="height: 40px;font-size: 15px;text-align: center;padding-left: 10px;padding-right: 10px;border-radius: 6px; ">Post</button>
+    </form>  
+    </div>
+    <!-- </a> -->
+<%})%>
+</ul>
+</div>
+</div>
+</body>

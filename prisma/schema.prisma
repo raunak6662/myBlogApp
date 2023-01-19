@@ -17,13 +17,15 @@ model User {
 
 model Blog {
   id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(255)
+  title     String   @db.VarChar(255) @unique
+  email     String 
   content   String?
 }
 
 model Comment{
   id        Int       @id @default(autoincrement())
   user_name String    @db.VarChar(255)
+  email     String 
   comment   String?
 }
 

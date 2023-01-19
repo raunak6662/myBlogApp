@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+<title>User Blogs</title>
+<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  $(document).ready(function(){
+    var maxLength = 300;
+    $(".show-read-more").each(function(){
+        var myStr = $(this).text();
+        if($.trim(myStr).length > maxLength){
+            var newStr = myStr.substring(0, maxLength);
+            var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+            $(this).empty().html(newStr);
+            $(this).append(' <a href="javascript:void(0);" class="read-more">read more...</a>');
+            $(this).append('<span class="more-text">' + removedStr + '</span>');
+        }
+    });
+    $(".read-more").click(function(){
+        $(this).siblings(".more-text").contents().unwrap();
+        $(this).remove();
+    });
+});
+</script>
+
+<style>
+    .container {
+    height: auto;
+    width: 800px;
+    position: relative;
+    top: 5%;
+    left: 15%;
+    border: 1px solid rgb(1, 10, 14);
+    padding: 50px;
+    margin: 20px;
+    background-color: white;
+}
+body{ 
+    /* background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-34-1600x900.jpg'); */
+    /* background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-36-1440x900.jpg'); */
+    background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-40-1600x900.jpg');
+    background-attachment: fixed;
+ }
+
+ .show-read-more .more-text{
+        display: none;
+    }
+
+  .btn {
+  float: right;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 16px;
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+hr.new1 {
+  border-top: 1px solid rgb(46, 42, 43);
+}
+
+</style>
+
+</head>
+<body>
+<div class="todo-container">
+<h1 style="text-align: center;color: #f1f1f1;">My Blogs</h1>
+<div class="">
+<ul class="todo-list">
+  <a href="/logout"><button class="btn">Log out</button></a>
+
+    <% data.forEach(function(eachUser){ %>
+    <div class="container">
+        <h1 style="text-align: left;font-size: 30px;font-family: Georgia, serif;"><%=eachUser.title%></h1>
+        <hr class="new1">
+        <p style="font-family: Georgia, sans-serif; font-size: 18px;word-spacing: 5px;line-height: 26pt;" class="show-read-more"><%=eachUser.content%></p><br>
+        
+        <br>
+        <a href="/blog/delete/<%=userID%>/<%=eachUser.id%>"><button class="btn">Delete</button></a>
+        <a href="/blog/update/<%=userID%>/<%=eachUser.id%>"><button class="btn">Update</button></a>
+    </div>
+    <br>
+<%})%>
+<a href="/newBlog/<%=userID%>"><button class="btn">Add new blog</button></a>
+
+</ul>
+</div>
+</div>
+</body>

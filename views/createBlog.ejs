@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Create a new Blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- <link rel="stylesheet" href="../stylesheets/style.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+<style>
+    .container {
+    height: 1000px;
+    width: 800px;
+    position: fixed;
+    top: 5%;
+    left: 25%;
+}
+body{
+    /* background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-34-1600x900.jpg'); */
+    /* background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-36-1440x900.jpg'); */
+    background-image: url('https://www.designyourway.net/blog/wp-content/uploads/2019/02/aesthetic-wallpaper-40-1600x900.jpg');
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="">
+            <form action="/blogs/<%=userID%>" method="post" name="Create_Blog" class="w3-container w3-card-4 w3-light-grey">
+                <h3 class="form-signin-heading">Ready to create a new blog!</h3>
+
+                <input type="text" class="w3-input w3-border-0" name="title" placeholder="Enter your title" required="" autofocus="" style="height: 70px;font-size: 25px;"/><br>
+                <textarea type="text" class="w3-input w3-border-0" name="content" placeholder="Description...." required="" style="height: 400px;font-size: 17px;"></textarea><br>
+
+                <button class="btn btn-lg btn-primary btn-block" name="Submit" value="CreateBlog" type="Submit" >Create</button><br>
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>
