@@ -49,13 +49,14 @@ module.exports = function (app) {
     })
 
     app.get('/allblogs', isLoggedIn, blogR.getAllBlogsOnApp);
-    app.get('/blogs/:userID', isLoggedIn, blogR.getAllBlogs);
+    app.get('/blog/:userID/all', isLoggedIn, blogR.getAllBlogs);
     app.get('/newBlog/:userID', isLoggedIn, blogR.addNewBlog);
     app.post('/blogs/:userID', isLoggedIn, blogR.createNewBlog);
 
-    // update existing blog
     app.get('/blog/update/:userID/:blogID', isLoggedIn, blogR.updateBlog);
     app.post('/blog/update/:userID/:blogID', isLoggedIn, blogR.updatedBlog);
-    
+
+    app.get('/blog/delete/:userID/:blogID', isLoggedIn, blogR.deleteBlog);
+
     app.get('/logout', isLoggedIn, welcomeR.logoutPage);
 }

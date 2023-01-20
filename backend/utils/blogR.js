@@ -89,11 +89,29 @@ const updatedBlog = async(req, res, next) => {
         userID: req.params.userID
     });
 }
+const deleteBlog = async(req, res) => {
+    const userEmail = req.user.emails[0].value;
+    const deleteUser = await prisma.blog.delete({
+        where: {
+            id: parseInt(req.params.blogID)
+        }
+    })
+    const userBlogs = await prisma.blog.findMany({
+        where: {
+            email: userEmail,
+        },
+    })
+    res.render('getUserBlogs', {
+        data: userBlogs,
+        userID: req.params.userID
+    });
+}
 module.exports = {
     getAllBlogsOnApp: getAllBlogsOnApp,
     getAllBlogs: getAllBlogs,
     addNewBlog:  addNewBlog,
     createNewBlog: createNewBlog,
     updateBlog: updateBlog,
-    updatedBlog: updatedBlog
+    updatedBlog: updatedBlog,
+    deleteBlog: deleteBlog
 }; 
