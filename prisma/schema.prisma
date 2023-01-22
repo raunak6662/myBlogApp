@@ -8,6 +8,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -17,9 +18,10 @@ model User {
 
 model Blog {
   id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(255) @unique
+  title     String   @db.VarChar(255)
   email     String 
   content   String?
+  comments  Comment[]
 }
 
 model Comment{
@@ -27,6 +29,10 @@ model Comment{
   user_name String    @db.VarChar(255)
   email     String 
   comment   String?
+  blogId    Int
+  blog    Blog      @relation(fields: [blogId], references: [id])
+
+  @@index([blogId])
 }
 
 model Session {

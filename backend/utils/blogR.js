@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient, user, comment } = require('@prisma/client');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const prisma = new PrismaClient();
 
@@ -54,6 +54,28 @@ const createNewBlog = async(req, res, next) => {
     });
 }
 
+const openBlog = async(req, res, next) => {
+    const userBlog = await prisma.blog.findUnique({
+        where: {
+            id: parseInt(req.params.blogID)
+        },
+    })
+    const userComment = await prisma.comment.findMany({
+        where: {
+            blogId: parseInt(req.params.blogID)
+        }
+    })
+    res.render('getOneBlog', {
+        userID: req.params.userID,
+        blogID: req.params.blogID,
+        title: userBlog.title,
+        content: userBlog.content,
+        comment: userComment,
+        userBlog: userBlog
+    })
+    //res.send(userComment);
+}
+
 const updateBlog = async(req, res, next) => {
     const userBlog = await prisma.blog.findUnique({
         where: {
@@ -106,6 +128,30 @@ const deleteBlog = async(req, res) => {
         userID: req.params.userID
     });
 }
+const addComment = async(req, res, next) => {
+    const userEmail = req.user.emails[0].value;
+    const blogID = parseInt(req.params.blogID);
+    const newComment = await prisma.comment.create({
+        data: {
+            user_name: req.user.name.givenName,
+            email: userEmail,
+            comment: req.body.text,
+            blogId: blogID
+        }
+    })
+    const allBlogs = await prisma.blog.findMany({
+        where: {
+            email: {
+                endsWith: ".com"
+            }
+        }
+    })
+    res.render('getFeeds', {
+        data: allBlogs,
+        userID: req.user.id
+    })
+}
+
 module.exports = {
     getAllBlogsOnApp: getAllBlogsOnApp,
     getAllBlogs: getAllBlogs,
@@ -113,5 +159,7 @@ module.exports = {
     createNewBlog: createNewBlog,
     updateBlog: updateBlog,
     updatedBlog: updatedBlog,
-    deleteBlog: deleteBlog
+    deleteBlog: deleteBlog,
+    openBlog: openBlog,
+    addComment: addComment
 }; 

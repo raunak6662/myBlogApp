@@ -46,6 +46,23 @@ body{
   background-color: black;
   color: white;
 }
+
+.Postbtn{
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 16px;
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.Postbtn:hover{
+  background-color: black;
+  color: white;
+}
 hr.new1 {
   border-top: 1px solid rgb(46, 42, 43);
 }
@@ -57,21 +74,23 @@ hr.new1 {
 <div class="">
 <ul class="todo-list">
     <div class="container">
-        <a href="/blog/delete/<%=userID%>/<%=blogID%>"><button class="btn">Delete</button></a>
-        <a href="/blog/update/<%=userID%>/<%=blogID%>"><button class="btn">Update</button></a>
         <h1 style="text-align: left;font-size: 30px;font-family: Georgia, serif;"><%=title%></h1>
         <hr class="new1">
         <p style="font-family: Georgia, sans-serif; font-size: 18px;word-spacing: 5px;line-height: 26pt;" class="show-read-more"><%=content%></p><br>
         <br>
         <hr class="new1">
         <h3>Comments
-        <a href="/like/<%=userID%>/<%=blogID%>"><button class="btn" style="height: 40px;font-size: 15px;text-align: center;padding-left: 10px;padding-right: 10px;border-radius: 6px;float: right;float: right; display: inline-flex; margin-top: 15px;">Like: <%=comment.likes.length%></button></a>  
         </h3>
-        <% for(var i=0; i<comment.comments.length; i++){ %>
-        <i class='fas fa-user-alt' ><p style="display:inline-flex; margin-left:10px ;"><%=comment.comments[i].text%></p></i>
-        
+        <div style="display: flex; flex-direction: row;">
+          <form action="/comment/<%=userID%>/<%=blogID%>" method="post" name="Write_Comment" class="w3-container w3-card-4 w3-light-grey postbutton">
+            <input type="text" class="w3-input w3-border-0 input" name="text" placeholder="Write your comment" required="" style="height: 30px;font-size: 15px;border-radius: 6px;"/>
+            <button class="Postbtn" name="Submit" value="Write_Comment" type="Submit" style="display: inline-flex;">Post</button>
+          </form>
+         </div>
+        <% comment.forEach(function(eachUser){ %>
+        <i class='fas fa-user-alt' ><p style="display:inline-flex; margin-left:10px ;"><%=eachUser.comment%></p></i>
         <br>
-        <%}%>
+        <%})%>
     </div>
     <br>
 </ul>

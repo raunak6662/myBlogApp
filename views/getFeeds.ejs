@@ -90,13 +90,8 @@ hr.new1 {
     <h1 style="text-align: left;font-size: 30px;font-family: Georgia, serif;"><a href="/feed/<%=userID%>/<%=eachUser.id%>" style="text-decoration:none; color: black;"><%=eachUser.title%></a></h1>
     <hr class="new1">
     <p style="font-family: Georgia, sans-serif; font-size: 18px;word-spacing: 5px;line-height: 26pt; white-space: nowrap; overflow: hidden;
-    text-overflow: ellipsis;max-width: 50ch;" class="show-read-more"><a href="/feed/<%=userID%>/<%=eachUser.id%>" style="text-decoration:none; color: black;"><%=eachUser.content%></a></p>
-    <form action="/comment/<%=userID%>/<%=eachUser.id%>" method="post" name="Write_Comment" class="w3-container w3-card-4 w3-light-grey postbutton">
-        <input type="text" class="w3-input w3-border-0 input" name="text" placeholder="Write your comment" required="" style="height: 30px;font-size: 15px;padding-right: 100px;border-radius: 6px;"/>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Write_Comment" type="Submit" style="height: 40px;font-size: 15px;text-align: center;padding-left: 10px;padding-right: 10px;border-radius: 6px; ">Post</button>
-    </form>  
+    text-overflow: ellipsis;max-width: 50ch;" class="show-read-more"><a href="/feed/<%=userID%>/<%=eachUser.id%>" style="text-decoration:none; color: black;"><%=eachUser.content%></a></p> 
     </div>
-    <!-- </a> -->
 <%})%>
 </ul>
 </div>
